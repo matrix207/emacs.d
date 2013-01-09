@@ -11,10 +11,14 @@
 (color-theme-initialize)  
 (color-theme-hober) 
 
-;;(color-theme-initialize)
-;;(color-theme-oswald)
-
 (add-to-list 'load-path "~/.emacs.d/evil")
     (require 'evil)
     (evil-mode 1)
 
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+
+(require 'linum) 
+	(global-linum-mode 1)
+
+;;yum install texinfo-tex
+(setq org-latex-to-pdf-process '("texi2pdf --pdf --clean --verbose --batch %f"))
