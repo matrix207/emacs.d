@@ -11,6 +11,8 @@
 ;;load different configuration files
 (load-file (concat EMACS_DIR "/abbrev-skeleton.el"))
 
+(load-file (concat EMACS_DIR "/my-auto-tex-cmd.el"))
+
 ;;vim emulate
 (add-to-list 'load-path "~/.emacs.d/evil")
     (require 'evil)
@@ -97,21 +99,6 @@
 ;                                  makefile-gmake-mode makefile-bsdmake-mo
 ;                                  autoconf-mode makefile-automake-mode)))
 
-
-;; Latex
-;; http://emacswiki.org/emacs/LaTeX
-(add-hook 'reftex-load-hook 'imenu-add-menubar-index)
-(add-hook 'reftex-mode-hook 'imenu-add-menubar-index)
-
-(global-set-key [down-mouse-3] 'imenu)
-
-(defun my-latex (action)
-  (interactive)
-  (if (buffer-modified-p) (save-buffer))
-  (let ((f1 (current-frame-configuration))
-        (retcode (shell-command (concat "~/.emacs.d/bin/my-latex " action " " buffer-file-name))))
-    (if (= retcode 0) (set-frame-configuration f1))))
-
-(add-hook 'latex-mode-hook (lambda ()
-      (define-key LaTeX-mode-map (kbd "<f12>") '(lambda () (interactive) (my-latex "preview")))
-      (define-key LaTeX-mode-map (kbd "<S-f12>") '(lambda () (interactive) (my-latex "create")))))
+;(setq org-latex-to-pdf-process
+;      '("xelatex -interaction nonstopmode %b"
+;        "xelatex -interaction nonstopmode %b"))
