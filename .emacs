@@ -107,9 +107,6 @@
 ; C-cc 快速编译
 ; C-cp 预览图像
 ; M-; 注释或者取消注释
-;
-;(load "graphviz-dot-mode.el" nil t t)
-;(load-file "EMACS_DIR/graphviz-dot-mode.el") 
 (load-file (concat EMACS_DIR "/graphviz-dot-mode.el"))
 
 (add-hook 'find-file-hook (lambda()
