@@ -102,3 +102,23 @@
 ;(setq org-latex-to-pdf-process
 ;      '("xelatex -interaction nonstopmode %b"
 ;        "xelatex -interaction nonstopmode %b"))
+
+; graphviz dot
+; C-cc 快速编译
+; C-cp 预览图像
+; M-; 注释或者取消注释
+;
+;(load "graphviz-dot-mode.el" nil t t)
+;(load-file "EMACS_DIR/graphviz-dot-mode.el") 
+(load-file (concat EMACS_DIR "/graphviz-dot-mode.el"))
+
+(add-hook 'find-file-hook (lambda()
+                            (if (string= "dot" (file-name-extension
+                                                buffer-file-name))
+                                (progn
+                                  (message "Enabling Setings for dot-mode")
+                                  (setq fill-column 1000)
+                                  (base-auto-pair)
+                                  (local-set-key (kbd "<C-f6>") 'compile)
+                                  )
+                              )))
