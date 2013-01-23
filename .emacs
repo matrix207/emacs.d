@@ -119,3 +119,20 @@
                                   (local-set-key (kbd "<C-f6>") 'compile)
                                   )
                               )))
+
+; slime
+(setq inferior-lisp-program "/usr/bin/sbcl") ; sbcl or clisp
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/slime") ; your SLIME directory
+(require 'slime)
+(slime-setup)
+;M-x slime
+
+; key words auto complete
+(defun lisp-indent-or-complete (&optional arg)
+  (interactive "p")
+  (if (or (looking-back "^\\s-*") (bolp))
+      (call-interactively 'lisp-indent-line)
+      (call-interactively 'slime-indent-and-complete-symbol)))
+(eval-after-load "lisp-mode"
+  '(progn
+     (define-key lisp-mode-map (kbd "TAB") 'lisp-indent-or-complete)))
